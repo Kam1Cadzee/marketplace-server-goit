@@ -1,12 +1,20 @@
 const http = require("http");
-const url = require("url");
 const router = require("./routes/router");
+const fs = require('fs');
+
+
+var options = {
+  key: fs.readFileSync('./src/keys/privatekey.ppk'),
+  cert: fs.readFileSync('./src/keys/certificate')
+};
+
+
+
 
 const startServer = port => {
   const server = http.createServer((request, response) => {
-    const parsedUrl = url.parse(request.url);
 
-    const func = router[parsedUrl.pathname] || router.default;
+    const func = router(request);
     func(request, response);
   });
 

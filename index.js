@@ -1,6 +1,6 @@
 const startServer = require('./src/server')
 
-startServer(3000);
+startServer(3003);
 
 
 /*const express = require("express");
